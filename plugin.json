@@ -1,0 +1,14 @@
+{
+    "pluginName": "钉钉",
+    "description": "钉钉网页版，Linux 下可用的客户端",
+	"main": "index.html",
+    "version": "0.0.1",
+    "author": "vfasky<vfasky@me.com>",
+    "logo": "logo.png",
+	"features": [
+	    {
+	        "code": "dingTalk",
+	        "cmds":["dingTalk", "钉钉"]
+	    }
+	]
+}
