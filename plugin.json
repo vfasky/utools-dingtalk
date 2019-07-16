@@ -5,6 +5,7 @@
     "version": "0.0.1",
     "author": "vfasky<vfasky@me.com>",
     "logo": "logo.png",
+    "preload":"preload.js", 
 	"features": [
 	    {
 	        "code": "dingTalk",

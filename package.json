@@ -4,5 +4,6 @@
   "description": "uTools插件：钉钉网页版，Linux 下可用的客户端",
   "main": "preload.js",
   "author": "vfasky",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {}
 }
