@@ -36,6 +36,8 @@ function dingTalkInit() {
     document.body.appendChild(iframe)
 }
 
+// console.log(global)
+
 // 插件初始化完成
 utools.onPluginReady(() => {
     dingTalkInit()
