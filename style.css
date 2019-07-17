@@ -7,7 +7,51 @@ body #layout-main {
     flex: none;
     border: none;
     box-shadow: none;
+    border-radius: 0;
 }
 body #layout-main #body{
     height: 100%;
+}
+body .search-bar-wraper {
+    margin-top: 12px;
+    margin-right: 240px;
+}
+
+body #header {
+    flex: 0;
+    height: 0;
+}
+
+body .upload-container-wrap {
+    position: fixed;
+    top: -4px;
+    right: 183px;
+    z-index: 1;
+}
+
+body .upload-container-wrap .upload-task-container {
+    color: #008cee;
+}
+
+body .search-bar-wraper .main-search-2 .select2-search-field input{
+    background: #fff;
+    color: #e6e5e6;
+}
+
+body #content-pannel .content-pannel-head ,
+body #menu-pannel {
+    background: #e7eaed;
+    border-top: 1px solid #e6e5e6;
+}
+
+body #menu-pannel .main-menus .menu-item.menu-company-call-center, 
+org-email {
+    display: none;
+}
+
+body #content-pannel .content-pannel-body,
+body #sub-menu-pannel.conv-list-pannel .conv-lists-box,
+body .conv-detail-pannel .send-msg-box-wrapper, 
+body .conv-detail-pannel .send-msg-box-wrapper .input-area {
+    background:#f7f7f7;
 }
