@@ -1,5 +1,26 @@
 const fs = require('fs')
 const path = require('path')
+const { remote, shell } = require('electron')
+const BrowserWindow = remote.BrowserWindow
+
+/**
+ * 打开连接
+ * @param {string} url 
+ */
+function openUrl(url) {
+    shell.openItem(url)
+    // let win = new BrowserWindow({ 
+    //     width: options.width, 
+    //     height: options.height, 
+    //     show: false 
+    // })
+    // win.on('closed', () => {
+    //     win = null
+    // })
+    // win.loadURL(url)
+    // win.show()
+}
+
 /**
  * 插入样式
  * @param {Document} doc
@@ -15,6 +36,23 @@ function addStyle(doc) {
 }
 
 /**
+ * 绑定事件
+ * @param {Document} doc 
+ */
+function bindEvent(doc) {
+    doc.body.addEventListener('click', (evt) => {
+        if (evt.target.tagName === 'A' && evt.target.href) {
+            let url = String(evt.target.href)
+            if (/^(http|https):/i.test(url) && url.indexOf('https://im.dingtalk.com/#') !== 0) {
+                openUrl(url)
+            // } else {
+            //     console.log(evt.target)
+            }
+        }
+    })
+}
+
+/**
  * dingtalk iframe 加载完执行
  * @param {HTMLIFrameElement} main 
  */
@@ -22,6 +60,7 @@ function dingTalkOnload (main) {
     const mainWindow = main.contentWindow
     const mainDoc = mainWindow.document
     addStyle(mainDoc)
+    bindEvent(mainDoc)
 }
 
 /**
@@ -36,7 +75,6 @@ function dingTalkInit() {
     document.body.appendChild(iframe)
 }
 
-// console.log(global)
 
 // 插件初始化完成
 utools.onPluginReady(() => {
