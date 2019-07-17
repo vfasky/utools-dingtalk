@@ -1,6 +1,6 @@
 {
   "name": "utools-dingtalk",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "uTools插件：钉钉网页版，Linux 下可用的客户端",
   "main": "preload.js",
   "author": "vfasky",

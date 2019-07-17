@@ -1,7 +1,9 @@
 const fs = require('fs')
 const path = require('path')
-const { remote, shell } = require('electron')
-const BrowserWindow = remote.BrowserWindow
+const { shell } = require('electron')
+// const BrowserWindow = remote.BrowserWindow
+
+let unreadTotal = 0
 
 /**
  * 打开连接
@@ -19,6 +21,23 @@ function openUrl(url) {
     // })
     // win.loadURL(url)
     // win.show()
+}
+
+/**
+ * 取有多少条未读信息
+ * @param {Document} doc 
+ */
+function getUnreadTotal(doc) {
+    let el = doc.querySelector('.main-menus .unread-num em.ng-binding')
+    if (el) {
+        let total = ~~el.textContent.trim()
+        if (total !== unreadTotal) {
+            utools.showNotification(`您有 ${total} 条钉钉信息`)
+        }
+        unreadTotal = total
+    } else {
+        unreadTotal = 0
+    }
 }
 
 /**
@@ -61,6 +80,12 @@ function dingTalkOnload (main) {
     const mainDoc = mainWindow.document
     addStyle(mainDoc)
     bindEvent(mainDoc)
+    getUnreadTotal(mainDoc)
+
+    // 每 5 秒检查一次
+    setInterval(() => {
+        getUnreadTotal(mainDoc)
+    }, 5000)
 }
 
 /**
