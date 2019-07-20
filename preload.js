@@ -1,112 +1,120 @@
 const fs = require('fs')
 const path = require('path')
-const { shell } = require('electron')
-// const BrowserWindow = remote.BrowserWindow
+const { shell, remote } = require('electron')
 
-let unreadTotal = 0
-
-/**
- * 打开连接
- * @param {string} url 
- */
-function openUrl(url) {
-    shell.openItem(url)
-    // let win = new BrowserWindow({ 
-    //     width: options.width, 
-    //     height: options.height, 
-    //     show: false 
-    // })
-    // win.on('closed', () => {
-    //     win = null
-    // })
-    // win.loadURL(url)
-    // win.show()
-}
+// 钉钉窗口
+let dingTalkWin = null
 
 /**
  * 取有多少条未读信息
  * @param {Document} doc 
  */
-function getUnreadTotal(doc) {
-    let el = doc.querySelector('.main-menus .unread-num em.ng-binding')
-    if (el) {
-        let total = ~~el.textContent.trim()
-        if (total !== unreadTotal) {
-            utools.showNotification(`您有 ${total} 条钉钉信息`)
-        }
-        unreadTotal = total
-    } else {
-        unreadTotal = 0
+function getUnreadTotal() {
+    if (!dingTalkWin) {
+        return
     }
-}
-
-/**
- * 插入样式
- * @param {Document} doc
- */
-function addStyle(doc) {
-    let style = document.createElement('style')
-    let css = fs.readFileSync(
-        path.join(__dirname, 'style.css'),
-        'utf8'
-    )
-    style.innerHTML = css
-    doc.head.appendChild(style)
-}
-
-/**
- * 绑定事件
- * @param {Document} doc 
- */
-function bindEvent(doc) {
-    doc.body.addEventListener('click', (evt) => {
-        if (evt.target.tagName === 'A' && evt.target.href) {
-            let url = String(evt.target.href)
-            if (/^(http|https):/i.test(url) && url.indexOf('https://im.dingtalk.com/#') !== 0) {
-                openUrl(url)
-            // } else {
-            //     console.log(evt.target)
+    
+    let code = `(() => {
+        if (window['__dt_unreadTotal'] === undefined) {
+            window['__dt_unreadTotal'] = 0
+            window.__dt_getUnreadTotal = function() {
+                console.log('check unread')
+                let el = document.querySelector('.main-menus .unread-num em.ng-binding')
+                if (el) {
+                    return ~~el.textContent.trim()
+                }
+                return 0
             }
+
+            setInterval(() => {
+                let total = window.__dt_getUnreadTotal()
+
+                if (total !== window['__dt_unreadTotal'] && total > 0) {
+                    new Notification('钉钉', {
+                        icon: 'https://g.alicdn.com/dingding/web/0.2.6/img/oldIcon.ico',
+                        body: \`您有 \${total} 条钉钉信息\`
+                    })
+                }
+                window['__dt_unreadTotal'] = total
+            }, 5000)
         }
-    })
+    })()`
+
+    dingTalkWin.webContents.executeJavaScript(code)
 }
 
-/**
- * dingtalk iframe 加载完执行
- * @param {HTMLIFrameElement} main 
- */
-function dingTalkOnload (main) {
-    const mainWindow = main.contentWindow
-    const mainDoc = mainWindow.document
-    addStyle(mainDoc)
-    bindEvent(mainDoc)
-    getUnreadTotal(mainDoc)
-
-    // 每 5 秒检查一次
-    setInterval(() => {
-        getUnreadTotal(mainDoc)
-    }, 5000)
-}
 
 /**
  * 初始化 web dingtalk
  */
 function dingTalkInit() {
-    const iframe = document.createElement('iframe')
-    iframe.onload = () =>　dingTalkOnload(iframe)
-    iframe.src = 'https://im.dingtalk.com/'
-    iframe.setAttribute('scrolling', 'no')
-    iframe.setAttribute('frameborder', '0')
-    document.body.appendChild(iframe)
+    if (dingTalkWin) {
+        dingTalkWin.show()
+        return
+    }
+
+    let checkUnreadTime = null
+
+    dingTalkWin = new remote.BrowserWindow({ 
+        width: 1200, 
+        height: 600, 
+        webPreferences: {
+            nodeIntegration: false
+        }
+    })
+
+    let css = fs.readFileSync(
+        path.join(__dirname, 'style.css'),
+        'utf8'
+    )
+
+    dingTalkWin.loadURL('https://im.dingtalk.com/')
+
+    dingTalkWin.on('closed', () => {
+        dingTalkWin = null
+        if (checkUnreadTime) {
+            clearInterval(checkUnreadTime)
+        }
+    })
+
+    dingTalkWin.webContents.on('dom-ready', () => {
+        // dingTalkWin.webContents.openDevTools()
+        dingTalkWin.webContents.insertCSS(css)
+        getUnreadTotal()
+
+        // 每 5 秒检查一次
+        checkUnreadTime = setInterval(() => {
+            getUnreadTotal()
+        }, 5000)
+    })
+
+    dingTalkWin.webContents.on('new-window', (event, url) => {
+        event.preventDefault()
+        shell.openExternal(url)
+    })
+
+    setTimeout(() => {
+        dingTalkWin.focus()
+    }, 100)
+
+
 }
 
 
 // 插件初始化完成
 utools.onPluginReady(() => {
-    dingTalkInit()
+    // dingTalkInit() 
+    // utools.outPlugin()
+    utools.hideMainWindow()
+})
+
+// 用户进入插件
+utools.onPluginEnter(({code, type, payload}) => {
+    // console.log('用户进入插件', code, type, payload)
+    dingTalkInit() 
+    // utools.outPlugin()
 })
 
 // 插件被分离
-utools.onPluginDetach(() => {
-
-})
+// utools.onPluginDetach(() => {
+// })
