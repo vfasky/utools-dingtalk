@@ -1,0 +1,13 @@
+{
+    "singleQuote": true,
+    "semi": false,
+    "tabWidth": 4,
+    "overrides": [
+        {
+            "files": "app/**/*.tsx",
+            "options": {
+                "parser": "typescript"
+            }
+        }
+    ]
+}

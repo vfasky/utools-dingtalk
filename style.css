@@ -13,24 +13,37 @@ body #layout-main #body{
     height: 100%;
 }
 body .search-bar-wraper {
-    margin-top: 12px;
-    margin-right: 240px;
+    position: fixed;
+    top: -10px;
+    right: 44px;
 }
 
-body #header {
-    flex: 0;
-    height: 0;
+body #header,
+body #header.lng-zh {
+    background: #e7eaed;
+    flex: 0 0 40px;
+    border: none;
+    border-radius: 0;
 }
+
+body #content-pannel {
+    background: #fff;
+}
+
+/* body #body {
+    position: relative;
+    z-index: 1;
+} */
 
 body .upload-container-wrap {
     position: fixed;
-    top: -4px;
-    right: 183px;
+    top: -11px;
+    right: 6px;
     z-index: 1;
 }
 
 body .upload-container-wrap .upload-task-container {
-    color: #008cee;
+    color: #707275;
 }
 
 body .search-bar-wraper .main-search-2 .select2-search-field input{
@@ -38,13 +51,39 @@ body .search-bar-wraper .main-search-2 .select2-search-field input{
     color: #e6e5e6;
 }
 
-body #content-pannel .content-pannel-head ,
+body #content-pannel .content-pannel-head {
+    background: #fff;
+}
 body #menu-pannel {
-    background: #e7eaed;
-    border-top: 1px solid #e6e5e6;
+    position: fixed;
+    height: 40px;
+    left: 6px;
+    top: 0px;
+    width: 600px;
+    flex-direction: row;
+    background: transparent;
+    border: none;
+    z-index: 2;
+}
+/* body #menu-pannel-body {
+    position: relative;
+    z-index: 1;
+} */
+body #menu-pannel .main-menus {
+    padding-left: 6px;
+    flex-direction: row;
+}
+
+body #menu-pannel .main-menus .menu-item {
+    width: 60px;
+}
+
+body #menu-pannel .main-menus .menu-item.menu-ding .menu-icon {
+    font-size: 24px;
 }
 
 body #menu-pannel .main-menus .menu-item.menu-company-call-center, 
+body #menu-pannel .extra-options .extra-options-inner .extra-item.admin,
 org-email {
     display: none;
 }
@@ -54,4 +93,73 @@ body #sub-menu-pannel.conv-list-pannel .conv-lists-box,
 body .conv-detail-pannel .send-msg-box-wrapper, 
 body .conv-detail-pannel .send-msg-box-wrapper .input-area {
     background:#f7f7f7;
+}
+
+body #menu-pannel .profile {
+    width: 30px;
+    flex: 0;
+}
+
+body #menu-pannel .profile .user-avatar.big-52 {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+
+body #menu-pannel .profile .user-avatar.big-52:hover {
+    border-color: #008cee;
+}
+
+/* body #sub-menu-pannel.conv-list-pannel .conv-lists-box {
+    padding-bottom: 20px;
+} */
+body #menu-pannel .extra-options {
+    border-left: 1px solid #e1e0e4;
+    padding-left: 20px;
+}
+
+body #menu-pannel .extra-options,
+body #menu-pannel extra-options-inner {
+    height: 40px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex: auto;
+}
+
+body #menu-pannel .extra-options .extra-options-inner .extra-item {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    line-height: 45px;
+}
+
+body #menu-pannel .extra-options .extra-options-inner .extra-item .tip-menu {
+    bottom: auto;
+}
+
+body #menu-pannel .extra-options .extra-options-inner .extra-item .tip-menu .tri {
+    display: none;
+}
+
+body .settings .setting-item .toggle label:before {
+    color: #707275;
+}
+
+body #menu-pannel .extra-options .extra-options-inner .extra-item .iconfont {
+    vertical-align: middle;
+    font-size: 24px;
+}
+
+body #sub-menu-pannel {
+    background: #f7f7f7;
+}
+
+/* body .conv-detail-pannel .content-pannel-body .chat-item.not-me .msg-bubble-area .msg-bubble.markdown-msg {
+    width: 100%;
+    max-width: 100%;
+} */
+body .conv-detail-pannel .send-msg-box-wrapper,
+body .conv-detail-pannel .send-msg-box-wrapper .action-area .send-message-button {
+    border-radius: 0;
 }
