@@ -2,6 +2,7 @@ const fs = require('fs')
 const path = require('path')
 const { shell, remote } = require('electron')
 
+const dingTalkWin = remote.getCurrentWindow()
 const dingTalkWeb = remote.getCurrentWebContents()
 
 /**
@@ -40,10 +41,13 @@ function getUnreadTotal() {
 setInterval(() => {
     let total = getUnreadTotal()
     if (total !== unreadTotal && total > 0) {
-        new Notification('钉钉', {
+        const notify = new Notification('钉钉', {
             icon: 'https://g.alicdn.com/dingding/web/0.2.6/img/oldIcon.ico',
             body: `您有 ${total} 条钉钉信息`
         })
+        notify.onclick = () => {
+            dingTalkWin.show()
+        }
     }
     unreadTotal = total
 }, 1000)

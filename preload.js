@@ -13,15 +13,42 @@ function dingTalkInit() {
         return
     }
 
-    dingTalkWin = new remote.BrowserWindow({
-        id: 'dingTalkWin',
+    const storageKey = 'dingTalkWin:size'
+
+    let winSize = {
         width: 800,
-        height: 600,
+        height: 600
+    }
+    let winSizeData = utools.db.get(storageKey)
+    if (winSizeData && winSizeData.data) {
+        winSize = winSizeData.data
+    }
+    // console.log(winSizeData)
+    // console.log(winSize.width)
+    // console.log(winSize.height)
+
+    dingTalkWin = new remote.BrowserWindow({
+        width: winSize.width,
+        height: winSize.height,
         autoHideMenuBar: true,
         icon: path.join(__dirname, 'logo.png'),
         webPreferences: {
             preload: path.join(__dirname, 'dingtalk-preload.js')
         }
+    })
+
+
+
+    /**
+     * 改变窗口大小
+     */
+    dingTalkWin.on('resize', () => {
+        const [width, height] = dingTalkWin.getSize()
+        // console.log(width, height)
+        utools.db.put({
+            _id: storageKey,
+            data: { width, height }
+        })
     })
 
     dingTalkWin.loadURL('https://im.dingtalk.com/')

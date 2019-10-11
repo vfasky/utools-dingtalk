@@ -2,7 +2,7 @@
     "pluginName": "钉钉",
     "description": "钉钉网页版，Linux 下可用的客户端",
 	"main": "index.html",
-	"version": "1.2.0",
+	"version": "1.3.0",
 	"homepage": "https://github.com/vfasky/utools-dingtalk",
     "author": "vfasky<vfasky@me.com>",
     "logo": "logo.png",

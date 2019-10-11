@@ -2,7 +2,15 @@
 
 > 这是给 Linux 的同学准备的
 
-### 更新记录
+## 更新记录
+
+## v1.0.3
+
+### 优化
+
+- 点击消息提醒,显示钉钉窗口
+
+## v1.0.2
 
 #### 新增
 - 优化界面，能在 800 * 600 下正常使用
@@ -15,16 +23,14 @@
 
 ![启动](https://i.loli.net/2019/07/17/5d2ecfd7c2ddb40965.png)
 
+**登录**
+
+![登录](https://i.loli.net/2019/10/11/ToVfaWM87931rSh.png)
+
 **主界面**
 
-![UTOOLS1563599447916.png](https://i.loli.net/2019/07/20/5d32a2587d87021290.png)
-
-![主界面](https://i.loli.net/2019/07/17/5d2ecf152065635040.jpg)
+![主界面](https://i.loli.net/2019/10/11/O4xWu8QHVnzS6bK.png)
 
 **消息提醒**
 
-![消息提醒](https://i.loli.net/2019/07/17/5d2ed2daee14512475.png)
-
-### 下载
-
-[点我下载](https://www.yuque.com/huangrongfa/nbz6lb/cagoau#f26ef914)
+![消息提醒](https://i.loli.net/2019/10/11/iukIV8bXZzSRFWd.png)
