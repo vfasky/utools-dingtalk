@@ -13,16 +13,16 @@ function dingTalkInit() {
         return
     }
 
-    const storageKey = 'dingTalkWin:size'
+    // const storageKey = 'dingTalkWin:size'
 
     let winSize = {
         width: 800,
         height: 600
     }
-    let winSizeData = utools.db.get(storageKey)
-    if (winSizeData && winSizeData.data) {
-        winSize = winSizeData.data
-    }
+    // let winSizeData = utools.db.get(storageKey)
+    // if (winSizeData && winSizeData.data) {
+    //     winSize = winSizeData.data
+    // }
     // console.log(winSizeData)
     // console.log(winSize.width)
     // console.log(winSize.height)
@@ -36,6 +36,8 @@ function dingTalkInit() {
             preload: path.join(__dirname, 'dingtalk-preload.js')
         }
     })
+    //dev
+    // dingTalkWin.webContents.openDevTools()
 
 
 
@@ -43,12 +45,12 @@ function dingTalkInit() {
      * 改变窗口大小
      */
     dingTalkWin.on('resize', () => {
-        const [width, height] = dingTalkWin.getSize()
+        // const [width, height] = dingTalkWin.getSize()
         // console.log(width, height)
-        utools.db.put({
-            _id: storageKey,
-            data: { width, height }
-        })
+        // utools.db.put({
+        //     _id: storageKey,
+        //     data: { width, height }
+        // })
     })
 
     dingTalkWin.loadURL('https://im.dingtalk.com/')

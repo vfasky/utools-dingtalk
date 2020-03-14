@@ -2,6 +2,8 @@ const fs = require('fs')
 const path = require('path')
 const { shell, remote } = require('electron')
 
+const contextMenu = require('./src/contextMenu')
+
 const dingTalkWin = remote.getCurrentWindow()
 const dingTalkWeb = remote.getCurrentWebContents()
 
@@ -22,6 +24,15 @@ dingTalkWeb.on('new-window', (event, url, frameName, disposition, options) => {
     if (!options.webContents) {
         shell.openExternal(url)
     }
+})
+
+/**
+ * 右键菜单
+ */
+dingTalkWeb.on('context-menu', (event, params) => {
+    event.preventDefault()
+    // console.log(params)
+    contextMenu(dingTalkWin, params)
 })
 
 /**
