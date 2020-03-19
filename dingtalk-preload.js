@@ -3,6 +3,7 @@ const path = require('path')
 const { shell, remote } = require('electron')
 
 const contextMenu = require('./src/contextMenu')
+const emotion = require('./src/emotion')
 
 const dingTalkWin = remote.getCurrentWindow()
 const dingTalkWeb = remote.getCurrentWebContents()
@@ -13,6 +14,7 @@ const dingTalkWeb = remote.getCurrentWebContents()
 const css = fs.readFileSync(path.join(__dirname, 'style.css'), 'utf8')
 dingTalkWeb.on('dom-ready', () => {
     dingTalkWeb.insertCSS(css)
+    emotion()
 })
 
 /**

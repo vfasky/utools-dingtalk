@@ -9,7 +9,7 @@ body #layout-main {
     box-shadow: none;
     border-radius: 0;
 }
-body #layout-main #body{
+body #layout-main #body {
     height: 100%;
 }
 body .search-bar-wraper {
@@ -46,7 +46,7 @@ body .upload-container-wrap .upload-task-container {
     color: #707275;
 }
 
-body .search-bar-wraper .main-search-2 .select2-search-field input{
+body .search-bar-wraper .main-search-2 .select2-search-field input {
     background: #fff;
     color: #e6e5e6;
 }
@@ -82,7 +82,7 @@ body #menu-pannel .main-menus .menu-item.menu-ding .menu-icon {
     font-size: 24px;
 }
 
-body #menu-pannel .main-menus .menu-item.menu-company-call-center, 
+body #menu-pannel .main-menus .menu-item.menu-company-call-center,
 body #menu-pannel .extra-options .extra-options-inner .extra-item.admin,
 org-email {
     display: none;
@@ -90,9 +90,9 @@ org-email {
 
 body #content-pannel .content-pannel-body,
 body #sub-menu-pannel.conv-list-pannel .conv-lists-box,
-body .conv-detail-pannel .send-msg-box-wrapper, 
+body .conv-detail-pannel .send-msg-box-wrapper,
 body .conv-detail-pannel .send-msg-box-wrapper .input-area {
-    background:#f7f7f7;
+    background: #f7f7f7;
 }
 
 body #menu-pannel .profile {
@@ -138,7 +138,13 @@ body #menu-pannel .extra-options .extra-options-inner .extra-item .tip-menu {
     bottom: auto;
 }
 
-body #menu-pannel .extra-options .extra-options-inner .extra-item .tip-menu .tri {
+body
+    #menu-pannel
+    .extra-options
+    .extra-options-inner
+    .extra-item
+    .tip-menu
+    .tri {
     display: none;
 }
 
@@ -160,6 +166,18 @@ body #sub-menu-pannel {
     max-width: 100%;
 } */
 body .conv-detail-pannel .send-msg-box-wrapper,
-body .conv-detail-pannel .send-msg-box-wrapper .action-area .send-message-button {
+body
+    .conv-detail-pannel
+    .send-msg-box-wrapper
+    .action-area
+    .send-message-button {
     border-radius: 0;
+}
+
+.icon {
+    width: 1em;
+    height: 1em;
+    vertical-align: -0.15em;
+    fill: currentColor;
+    overflow: hidden;
 }
